@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+ 
+ 
+ {% block conteudo %}
+ <h1>Forum bugado</h1>
+ {% if user.is_authenticated %}
+ <a href="{% url 'novo_post' %}">Nova publicação</a>
+ {% endif %}
+    {% for post in posts %}
+        <h3><a href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a></h3>
+            {% if user == post.usuario %}
+            <sub><a href="{% url 'editar_post' post.id%}">(editar)</a></sub>
+            {% endif%}
+        <small> {{post.data_criacao}}</small> 
+    {% endfor %}
+
+{% endblock %}   
